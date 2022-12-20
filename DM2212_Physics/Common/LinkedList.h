@@ -39,8 +39,8 @@ public:
 	/// <summary>
 	/// Adds new Node* after existing Node*.
 	/// </summary>
-	/// <param name="existingNode"></param>
-	/// <param name="data"></param>
+	/// <param name="existingNode - which node to add after"></param>
+	/// <param name="data - value to add"></param>
 	void AddAfter(Node<T>* existingNode, T data);
 
 
