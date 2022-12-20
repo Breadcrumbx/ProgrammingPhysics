@@ -6,7 +6,6 @@
 SceneCollision::SceneCollision()
 {
 }
-
 SceneCollision::~SceneCollision()
 {
 }

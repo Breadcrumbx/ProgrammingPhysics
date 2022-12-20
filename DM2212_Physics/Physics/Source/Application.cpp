@@ -88,11 +88,12 @@ void Application::Init()
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); //We don't want the old OpenGL 
 
-
+	
 	//Create a window and create its OpenGL context
 	m_width = 800;
-	m_height = 600;
-	m_window = glfwCreateWindow(m_width, m_height, "2D Pinball", glfwGetPrimaryMonitor(), NULL);
+	m_height = 600;		
+	//glfwGetPrimaryMonitor() - For Full Screen , gets the primary monitor (1st) | NULL = Windowed mode
+	m_window = glfwCreateWindow(m_width, m_height, "2D Pinball", NULL , NULL);
 	//m_window = glfwCreateWindow(m_width, m_height, "Physics", NULL, NULL);
 	//If the window couldn't be created
 	if (!m_window)
@@ -124,7 +125,7 @@ void Application::Init()
 void Application::Run()
 {
 	//Main Loop
-	Scene* scene = new SceneAsteroid();
+	Scene* scene = new SceneCollision();
 	//Scene* scene1;
 	scene->Init();
 

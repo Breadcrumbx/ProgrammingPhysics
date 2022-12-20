@@ -4,10 +4,11 @@
 #include "GameObject.h"
 #include <vector>
 #include "SceneBase.h"
-
+// Pinball Scene Class
 class SceneCollision : public SceneBase
 {
 public:
+	// Pinball Scene
 	SceneCollision();
 	~SceneCollision();
 
@@ -60,5 +61,4 @@ protected:
 	int highScore =0;
 	bool collectedpowerUp = false;
 };
-
 #endif
