@@ -1,0 +1,44 @@
+﻿  Application.cpp
+  SceneAsteroid.cpp
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(18,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(41,58): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(41,37): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(77,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(78,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(143,19): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(144,13): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(145,14): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(146,17): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(147,16): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(148,19): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(153,16): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(163,14): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(173,19): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(183,20): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(201,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(201,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(215,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(215,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(264,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(264,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(283,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(370,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(371,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(377,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(379,80): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(381,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(420,25): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(456,21): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(487,21): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(630,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(630,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(638,50): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(675,59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(675,38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(697,59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(697,38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(717,59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Year 2 Sem 1\pp\DM2212_Physics\Physics\Source\SceneAsteroid.cpp(717,38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Physics.vcxproj -> D:\Year 2 Sem 1\pp\DM2212_Physics\Debug\Physics.exe

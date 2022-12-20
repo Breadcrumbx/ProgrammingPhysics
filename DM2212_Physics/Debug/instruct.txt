@@ -1,0 +1,2 @@
+press r to reload
+5 bullets
