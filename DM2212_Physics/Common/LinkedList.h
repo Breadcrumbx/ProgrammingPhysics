@@ -36,7 +36,12 @@ public:
 	/// <param name="data"></param>
 	void AddLast(T data);
 
-	void AddAfter(Node* )
+	/// <summary>
+	/// Adds new Node* after existing Node*.
+	/// </summary>
+	/// <param name="existingNode"></param>
+	/// <param name="data"></param>
+	void AddAfter(Node<T>* existingNode, T data);
 
 
 	/// <summary>
