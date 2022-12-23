@@ -13,12 +13,12 @@ template<typename T>
 // Destructor
 LinkedList<T>::~LinkedList()
 {
-	temp = head;
-	while (temp != nullptr)
+	Node<T>* temp = nullptr;
+	while (head != nullptr)
 	{
-		head = temp;
-		temp = temp->next;
-		delete head;
+		temp = head;
+		head = head->next;
+		delete temp;
 	}
 }
 
@@ -30,7 +30,7 @@ void LinkedList<T>::AddFirst(T data)
 		AddLast(data);
 		return;
 	}
-	temp = new Node<T>();
+	Node<T>* temp = new Node<T>();
 	temp->data = data;
 	// Readjusting List
 	temp->next = head;
@@ -42,7 +42,7 @@ void LinkedList<T>::AddFirst(T data)
 template<typename T>
 void LinkedList<T>::AddLast(T data)
 {
-	temp = new Node<T>();
+	Node<T>* temp = new Node<T>();
 	temp->data = data;
 	// Checks if head is empty
 	if (head == nullptr || head->next == nullptr)
@@ -59,7 +59,7 @@ void LinkedList<T>::AddLast(T data)
 }
 
 template<typename T>
-Node<T>* LinkedList<T>::Find(Node<T>* nodeToFind)
+Node<T>* LinkedList<T>::FindNode(Node<T>* nodeToFind)
 {
-	return nullptr;
+
 }

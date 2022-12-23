@@ -43,13 +43,21 @@ public:
 	/// <param name="data - value to add"></param>
 	void AddAfter(Node<T>* existingNode, T data);
 
+	/// <summary>
+	/// Gets the Length of List.
+	/// </summary>
+	/// <returns>count</returns>
+	float Count()
+	{
+		return count;
+	}
 
 	/// <summary>
 	/// Recursively finds the Node* you are looking for in the Linked List.
 	/// </summary>
 	/// <param name="nodeToFind"></param>
 	/// <returns>Returns NULL if nodetoFind cannot be found else returns found node.</returns>
-	Node<T>* Find(Node<T>* nodeToFind);
+	Node<T>* FindNode(Node<T>* nodeToFind);
 private:
-	Node<T>* temp;
+	float count;
 };
