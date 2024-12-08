@@ -26,8 +26,9 @@ void SceneKinematics::Init()
 	Math::InitRNG();
 
 	m_ghost = new GameObject(GameObject::GO_BALL);
+	ballRadius = m_ghost->scale.x;
 	//Exercise 1: construct 10 GameObject with type GO_BALL and add into m_goList
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 1000; i++)
 	{
 		GameObject* ball = new GameObject(GameObject::GO_BALL);
 		m_goList.push_back(ball);
@@ -239,7 +240,7 @@ void SceneKinematics::Update(double dt)
 			{
 				//Exercise 2: implement equation 1 & 2
 				go->vel += m_gravity * dt * m_speed;
-				go->pos += go->vel * dt * m_speed;
+				go->pos += go->vel * dt;
 
 				//Exercise 12: replace Exercise 2 code and use average speed instead
 			}
@@ -250,6 +251,9 @@ void SceneKinematics::Update(double dt)
 				for (std::vector<GameObject*>::iterator it2 = m_goList.begin(); it2 != m_goList.end(); ++it2)
 				{
 					GameObject* temp = (GameObject*)*it2;
+					// No point checking your own self
+					if (temp == go)
+						continue;
 					if (temp->active && temp->type == GameObject::GO_CUBE)
 					{
 						// checking length between the two objects
@@ -261,10 +265,47 @@ void SceneKinematics::Update(double dt)
 							temp->active = false;
 						}
 					}
+					else if (temp->active && temp->type == GameObject::GO_BALL)
+					{
+						Vector3 dist = temp->pos - go->pos;
+						float combinedRadii = go->scale.x + temp->scale.x;
+						float sqrDistance = (go->pos - temp->pos).LengthSquared();
+						if (dist.LengthSquared() < combinedRadii * combinedRadii)
+						{
+							// Elastic collision
+							float displacement = (go->vel - temp->vel).Dot(go->pos - temp->pos) / sqrDistance;
+							float combinedMasses = go->mass + temp->mass;
+							go->vel = go->vel - (2 * temp->mass / combinedMasses) * displacement * (-dist);
+							temp->vel = temp->vel - (2 * go->mass / combinedMasses) * displacement * (dist);
+
+							/*m1 = go->mass;
+							m2 = go2->mass;
+							u1 = go->vel;
+							u2 = go2->vel;
+
+							float sqDist = (go->pos - go2->pos).LengthSquared();
+							float dp = (u1 - u2).Dot(go->pos - go2->pos) / sqDist;
+							v1 = u1 - 2 * m2 / (m1 + m2) * dp * (go->pos - go2->pos);
+							v2 = u2 - 2 * m1 / (m1 + m2) * dp * (go2->pos - go->pos);
+
+							go->vel = v1;
+							go2->vel = v2;*/
+						} 
+					}
 				}
 			}
 
 			//Exercise 5: unspawn ball when outside window
+			
+			if (go->pos.x < ballRadius || go->pos.x > m_worldWidth - ballRadius)
+			{
+				go->vel.x *= -1;
+			}
+			if (go->pos.y > m_worldHeight - ballRadius || go->pos.y < ballRadius)
+			{
+				go->vel.y *= -1;
+			}
+			// If clip out of screen, make sure it is deleted
 			if (go->pos.x < 0 - go->scale.Length() || go->pos.x > m_worldWidth + go->scale.Length() || go->pos.y < 0 - go->scale.Length() || go->pos.y > m_worldHeight + go->scale.Length())
 			{
 				go->active = false;

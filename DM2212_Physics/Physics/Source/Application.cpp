@@ -125,7 +125,7 @@ void Application::Init()
 void Application::Run()
 {
 	//Main Loop
-	Scene* scene = new SceneCollision();
+	Scene* scene = new SceneKinematics();
 	//Scene* scene1;
 	scene->Init();
 

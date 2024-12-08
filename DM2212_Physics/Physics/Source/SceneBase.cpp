@@ -16,7 +16,7 @@ SceneBase::~SceneBase()
 {
 }
 
-void SceneBase::Init()
+void SceneBase::Init()  
 {
 	// Black background
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);

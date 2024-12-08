@@ -1,16 +1,3 @@
-﻿  LINK : E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Debug\Physics.exe not found or not built by the last incremental link; performing full link
+﻿  SceneSimulation.cpp
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-Utility.obj : warning LNK4099: PDB '' was not found with 'Utility.obj' or at ''; linking object as if no debug info
-shader.obj : warning LNK4099: PDB '' was not found with 'shader.obj' or at ''; linking object as if no debug info
-SceneKinematics.obj : warning LNK4099: PDB '' was not found with 'SceneKinematics.obj' or at ''; linking object as if no debug info
-SceneBase.obj : warning LNK4099: PDB '' was not found with 'SceneBase.obj' or at ''; linking object as if no debug info
-SceneAsteroid.obj : warning LNK4099: PDB '' was not found with 'SceneAsteroid.obj' or at ''; linking object as if no debug info
-MeshBuilder.obj : warning LNK4099: PDB '' was not found with 'MeshBuilder.obj' or at ''; linking object as if no debug info
-Mesh.obj : warning LNK4099: PDB '' was not found with 'Mesh.obj' or at ''; linking object as if no debug info
-main.obj : warning LNK4099: PDB '' was not found with 'main.obj' or at ''; linking object as if no debug info
-LoadTGA.obj : warning LNK4099: PDB '' was not found with 'LoadTGA.obj' or at ''; linking object as if no debug info
-LoadOBJ.obj : warning LNK4099: PDB '' was not found with 'LoadOBJ.obj' or at ''; linking object as if no debug info
-GameObject.obj : warning LNK4099: PDB '' was not found with 'GameObject.obj' or at ''; linking object as if no debug info
-Camera.obj : warning LNK4099: PDB '' was not found with 'Camera.obj' or at ''; linking object as if no debug info
-Application.obj : warning LNK4099: PDB '' was not found with 'Application.obj' or at ''; linking object as if no debug info
   Physics.vcxproj -> E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Debug\Physics.exe

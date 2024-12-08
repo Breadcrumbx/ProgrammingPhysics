@@ -13,7 +13,6 @@ SceneCollision::~SceneCollision()
 void SceneCollision::Init()
 {
 	SceneBase::Init();
-
 	//Physics code here
 	m_speed = 1.f;
 	
@@ -443,7 +442,7 @@ void SceneCollision::Update(double dt)
 		Pillar2->vel.x = 0;
 	}
 	
-
+	
 	// Spring button
 	if (Application::IsKeyPressed(VK_SPACE))
 	{
@@ -590,6 +589,7 @@ void SceneCollision::Update(double dt)
 
 			//Exercise 13: improve collision detection algorithm [solution to be given later] 
 		}
+		// Gravity
 		if (go->type == GameObject::GO_BALL)
 		{
 			go->vel.y -= 98.f * dt;
@@ -980,13 +980,13 @@ void SceneCollision::CollisionResponse(GameObject* go, GameObject* go2)
 	{
 		Vector3 N = go2->normal;
 		Vector3 u = go->vel;
-		go->vel = u - (2 * u.Dot(N)) * N * 0.9;
+		go->vel = u - (2 * u.Dot(N)) * N * 0.9f;
 	}
 	else if (go2->type == GameObject::GO_BUMPER)
 	{
 		Vector3 N = (go2->pos - go->pos).Normalized();
 		Vector3 u = go->vel;
-		go->vel = u - (2 * u.Dot(N)) * N * 1.1;
+		go->vel = u - (2 * u.Dot(N)) * N * 1.1f;
 		go2->scale = Vector3(5.5, 5.5, 1);
 		score += 2;
 	}
@@ -994,7 +994,7 @@ void SceneCollision::CollisionResponse(GameObject* go, GameObject* go2)
 	{
 		Vector3 N = go2->normal;
 		Vector3 u = go->vel;
-		go->vel = u - (2 * u.Dot(N)) * N * 1.1;
+		go->vel = u - (2 * u.Dot(N)) * N * 1.1f;
 		if (go->vel.Length() > 120)
 		{
 			go->vel = go->vel.Normalized() * 120;
