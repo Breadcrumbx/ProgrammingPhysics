@@ -26,12 +26,12 @@ void SceneSimulation::Init()
 	//Simulation speed here
 	m_speed = 1.f;
 
-	m_gravity.Set(0, -9.8f, 0); //init gravity as 9.8ms-2 downwards
+	m_gravity.Set(0, 0, 0); //init gravity as 9.8ms-2 downwards
 	Math::InitRNG();
 
 	m_ghost = new GameObject(GameObject::GO_BALL);
 	//Exercise 1: construct 10 GameObject with type GO_BALL and add into m_goList
-	for (int i = 0; i < 1000; i++)
+	for (int i = 0; i < 150; i++)
 	{
 		GameObject* ball = new GameObject(GameObject::GO_BALL);
 		m_goList.push_back(ball);
@@ -64,6 +64,8 @@ void SceneSimulation::Update(double dt)
 			if (go->active)
 				go->active = false;
 		}
+		// Reset the count here
+		m_count = 0;
 	}
 	if (Application::IsKeyPressed('B'))
 	{
@@ -73,6 +75,7 @@ void SceneSimulation::Update(double dt)
 			GameObject* go = (GameObject*)*it;
 			if (!go->active)
 			{
+				++m_count;
 				go->active = true;
 				go->type = GameObject::GO_BALL;
 				int w = Application::GetWindowWidth();
@@ -127,6 +130,7 @@ void SceneSimulation::Update(double dt)
 			GameObject* go = *it;
 			if (!go->active)
 			{
+				++m_count;
 				go->active = true;
 				go->type = GameObject::GO_BALL;
 				go->scale = m_ghost->scale;
@@ -252,6 +256,7 @@ void SceneSimulation::Update(double dt)
 			if (go->pos.x < 0 - go->scale.Length() || go->pos.x > m_worldWidth + go->scale.Length() || go->pos.y < 0 - go->scale.Length() || go->pos.y > m_worldHeight + go->scale.Length())
 			{
 				go->active = false;
+				--m_count;
 			}
 		}
 	}
@@ -385,7 +390,7 @@ bool SceneSimulation::CheckCollision(GameObject* go, GameObject* go2)
 	{
 		float combinedRadii = go->scale.x + go2->scale.x;
 		float distanceSquared = (go->pos - go2->pos).LengthSquared();
-		return(distanceSquared <= combinedRadii * combinedRadii);
+		return(distanceSquared <= combinedRadii * combinedRadii && (go2->vel - go->vel).Dot(go2->pos - go->pos) < 0);
 	}
 	return false;
 }

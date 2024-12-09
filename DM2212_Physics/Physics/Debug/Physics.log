@@ -1,21 +1,19 @@
-﻿  Application.cpp
-  SceneSimulation.cpp
+﻿  SceneSimulation.cpp
 E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(47,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
 E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(52,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(80,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(80,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(81,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(81,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(97,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(97,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(118,61): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(118,33): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(140,67): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(140,39): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(172,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(173,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(176,21): warning C4018: '<': signed/unsigned mismatch
-E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(204,28): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(205,26): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
+E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(83,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(83,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(84,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(84,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(100,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(100,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(121,61): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(121,33): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(144,67): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(144,39): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(176,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(177,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(180,21): warning C4018: '<': signed/unsigned mismatch
+E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(208,28): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(209,26): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Physics.vcxproj -> E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Debug\Physics.exe
