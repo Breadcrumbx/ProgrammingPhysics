@@ -12,14 +12,24 @@ public:
 	~SceneSimulation();
 
 	virtual void Init();
-	virtual void Update(float dt);
+	virtual void Update(double dt);
 	virtual void Render();
 	virtual void Exit();
 
 	bool CheckCollision(GameObject* go, GameObject* go2);
 	void CollisionResponse(GameObject* go, GameObject* go2);
 	void RenderGO(GameObject* go);
-
+private:
+	std::vector<GameObject*> m_goList;
+	// Speed of simulation
+	float m_speed;
+	float m_worldWidth;
+	float m_worldHeight;
+	// Number of gameobjects in scene
+	unsigned int m_count;
+	Vector3 m_gravity;
+	// Ghost object
+	GameObject* m_ghost;
 };
 
 #endif

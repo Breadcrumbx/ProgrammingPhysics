@@ -19,7 +19,7 @@ void SceneKinematics::Init()
 	m_worldHeight = 100.f;
 	m_worldWidth = m_worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
 
-	//Physics code here
+	//Simulation speed here
 	m_speed = 1.f;
 	
 	m_gravity.Set(0, -9.8f, 0); //init gravity as 9.8ms-2 downwards
@@ -38,7 +38,6 @@ void SceneKinematics::Init()
 void SceneKinematics::Update(double dt)
 {
 	SceneBase::Update(dt);
-
 	//Calculating aspect ratio
 	m_worldHeight = 100.f;
 	m_worldWidth = m_worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();

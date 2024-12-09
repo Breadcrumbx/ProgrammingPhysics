@@ -14,6 +14,7 @@
 #include "SceneKinematics.h"
 #include "SceneAsteroid.h"
 #include "SceneCollision.h"
+#include "SceneSimulation.h"
 GLFWwindow* m_window;
 const unsigned char FPS = 60; // FPS of this game
 const unsigned int frameTime = 1000 / FPS; // time for each frame
@@ -125,7 +126,7 @@ void Application::Init()
 void Application::Run()
 {
 	//Main Loop
-	Scene* scene = new SceneKinematics();
+	Scene* scene = new SceneSimulation();
 	//Scene* scene1;
 	scene->Init();
 
