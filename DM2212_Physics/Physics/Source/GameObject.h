@@ -3,6 +3,8 @@
 
 #include "Vector3.h"
 
+struct Cell;
+
 struct GameObject
 {
 	enum GAMEOBJECT_TYPE
@@ -39,6 +41,8 @@ struct GameObject
 	Vector3 vel;
 	Vector3 scale;
 	Vector3 normal;
+	Cell* currentCell = nullptr;
+	unsigned int cellVectorIndex = -1;
 	bool active;
 	float mass;
 	int hp;

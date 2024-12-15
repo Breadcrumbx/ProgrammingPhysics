@@ -1,6 +1,6 @@
 #ifndef SCENE_H
 #define SCENE_H
-
+// Abstract class
 class Scene
 {
 public:

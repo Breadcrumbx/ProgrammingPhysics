@@ -249,7 +249,22 @@ Return a random float between min and max
 		float num = (max - min) * RandFloat ();
 		return (num + min);
 	}//end of RandFloatMinMax function
+/******************************************************************************/
+/*!
+\brief
+Linear interpolation between two values
 
+\param start - starting value
+\param goal - goal value
+
+\exception None
+\return float
+*/
+	inline float Lerp(float start, float goal, float dt)
+	{
+		return start + (goal - start) * dt;
+
+	}// end of LinearInterpolation function
 }//end namespace Math
 
 /******************************************************************************/

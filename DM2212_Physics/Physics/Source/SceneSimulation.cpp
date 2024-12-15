@@ -15,11 +15,14 @@ SceneSimulation::~SceneSimulation()
 void SceneSimulation::Init()
 {
 	SceneBase::Init();
+	Math::InitRNG();
 
 	//Calculating aspect ratio
 	m_worldHeight = 100.f;
 	m_worldWidth = m_worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
 
+	m_grid = std::make_unique<Grid>(m_worldWidth, m_worldHeight, 8);
+	
 	// Number of gameobjects in scene
 	m_count = 0;
 
@@ -27,11 +30,10 @@ void SceneSimulation::Init()
 	m_speed = 1.f;
 
 	m_gravity.Set(0, 0, 0); //init gravity as 9.8ms-2 downwards
-	Math::InitRNG();
 
 	m_ghost = new GameObject(GameObject::GO_BALL);
 	//Exercise 1: construct 10 GameObject with type GO_BALL and add into m_goList
-	for (int i = 0; i < 150; i++)
+	for (int i = 0; i < 5000; i++)
 	{
 		GameObject* ball = new GameObject(GameObject::GO_BALL);
 		m_goList.push_back(ball);
@@ -55,6 +57,26 @@ void SceneSimulation::Update(double dt)
 			m_speed = 0;
 		}
 	}
+	// Replicating tunneling for debugging 
+	if (Application::IsKeyPressed('T'))
+	{
+		if (!m_goList[0]->active)
+		{
+			std::cout << "Once!" << std::endl;
+			GameObject* go = m_goList[0];
+			if (!go->active)
+			{
+				++m_count;
+				go->active = true;
+				go->type = GameObject::GO_BALL;
+				go->scale = m_ghost->scale;
+
+				go->pos = Vector3(65.83, 45.5, 0);
+				go->vel = Vector3(-204.7, 3, 0);
+				m_grid->AddGameObject(go);
+			}
+		}
+	}
 	if (Application::IsKeyPressed('C'))
 	{
 		//Exercise 9: clear screen
@@ -62,14 +84,17 @@ void SceneSimulation::Update(double dt)
 		{
 			GameObject* go = (GameObject*)*it;
 			if (go->active)
+			{
 				go->active = false;
+				m_grid->RemoveGameObject(go);
+			}
 		}
 		// Reset the count here
 		m_count = 0;
 	}
 	if (Application::IsKeyPressed('B'))
 	{
-		//Exercise 9: spawn balls
+		// Spawns every ballin the list
 		for (std::vector<GameObject*>::iterator it = m_goList.begin(); it != m_goList.end(); ++it)
 		{
 			GameObject* go = (GameObject*)*it;
@@ -80,8 +105,9 @@ void SceneSimulation::Update(double dt)
 				go->type = GameObject::GO_BALL;
 				int w = Application::GetWindowWidth();
 				int h = Application::GetWindowHeight();
-				go->pos.Set(rand() % int(m_worldWidth), rand() % int(m_worldHeight), 0);
-				go->vel.Set(rand() % 200 - 100, rand() % 200 - 100, 0); //random range between -100 - 100
+				go->pos.Set(rand() % int(m_worldWidth - go->scale.x) + go->scale.x , rand() % int(m_worldHeight - go->scale.x) + go->scale.x, 0); // Make sure when objects are spawned they are within the screen
+				go->vel.Set(rand() % 2, rand() % 2 , 0); //random range between -100 - 100
+				m_grid->AddGameObject(go);
 			}
 		}
 	}
@@ -105,7 +131,7 @@ void SceneSimulation::Update(double dt)
 	//Mouse Section
 	static bool bLButtonState = false;
 	//Exercise 10: ghost code here
-	if (!bLButtonState && Application::IsMousePressed(0))
+	if (!bLButtonState && Application::IsMousePressed(0) && !m_goList[m_goList.size() - 1]->active)
 	{
 		bLButtonState = true;
 		std::cout << "LBUTTON DOWN" << std::endl;
@@ -114,11 +140,11 @@ void SceneSimulation::Update(double dt)
 		Application::GetCursorPos(&x, &y);
 		int w = Application::GetWindowWidth();
 		int h = Application::GetWindowHeight();
-		//Exercise 10: spawn ghost ball
+		// Spawn ghost ball
 		if (!m_ghost->active)
 		{
 			m_ghost->active = true;
-			m_ghost->pos = Vector3(x / w * m_worldWidth, (h - y) / h * m_worldHeight, 0);
+			m_ghost->pos = Vector3(x / w * m_worldWidth, (h - y) / h * m_worldHeight, 0); // Conversion from screen space to world space?
 		}
 	}
 	else if (bLButtonState && !Application::IsMousePressed(0))
@@ -144,6 +170,7 @@ void SceneSimulation::Update(double dt)
 				go->vel = go->pos - Vector3(x / w * m_worldWidth, (h - y) / h * m_worldHeight, 0);
 				m_ghost->vel = go->vel;
 				m_ghost->active = false;
+				m_grid->AddGameObject(go);
 				break;
 			}
 		}
@@ -196,70 +223,83 @@ void SceneSimulation::Update(double dt)
 
 	//Physics Simulation Section
 
-	//Exercise 11: update kinematics information
+	//Updating Kinematics & Collision checking is done here
 	for (std::vector<GameObject*>::iterator it = m_goList.begin(); it != m_goList.end(); ++it)
 	{
 		GameObject* go = (GameObject*)*it;
-		if (go->active)
+		if (!go->active)
+			continue;
+		// Movement
+		if (go->type == GameObject::GO_BALL)
 		{
-			if (go->type == GameObject::GO_BALL)
-			{
-				//Exercise 2: implement equation 1 & 2
-				go->vel += m_gravity * dt * m_speed; // m_speed is the speed of the simulation tldr makes things go fast yes
-				go->pos += go->vel * dt;
-			}
-
-			// Please fix this i don't like this , use quad tree
-			if (go->type == GameObject::GO_BALL)
-			{
-				for (std::vector<GameObject*>::iterator it2 = m_goList.begin(); it2 != m_goList.end(); ++it2) // n^2 algo
-				{
-					GameObject* temp = (GameObject*)*it2;
-					// No point checking your own self
-					if (temp == go)
-						continue;
-					if (temp->active && temp->type == GameObject::GO_CUBE)
-					{
-						// checking length between the two objects
-						if (CheckCollision(go, temp))
-						{
-							go->active = false;
-							temp->active = false;
-						}
-					}
-					else if (temp->active && temp->type == GameObject::GO_BALL)
-					{
-						if (CheckCollision(go, temp))
-						{
-							// Elastic collision
-							float sqrDistance = (go->pos - temp->pos).LengthSquared();
-							float displacement = (go->vel - temp->vel).Dot(go->pos - temp->pos) / sqrDistance;
-							float combinedMasses = go->mass + temp->mass;
-							go->vel = go->vel - (2 * temp->mass / combinedMasses) * displacement * (go->pos - temp->pos); // v1 = v1 - 2m2 / (m1 + m2) * (v1 - v2).(x1 - x2) * (x1 - x2)
-							temp->vel = temp->vel - (2 * go->mass / combinedMasses) * displacement * (temp->pos - go->pos);// v2 = v2 - 2m1 / (m1 + m2) * (v1 - v2).(x1 - x2) * (x2 - x1)
-						}
-					}
-				}
-			}
-
-			//Exercise 5: unspawn ball when outside window
-
-			if (go->pos.x < go->scale.x || go->pos.x > m_worldWidth - go->scale.x)
-			{
-				go->vel.x *= -1;
-			}
-			if (go->pos.y > m_worldHeight - go->scale.x || go->pos.y < go->scale.x)
-			{
-				go->vel.y *= -1;
-			}
-			// If clip out of screen, make sure it is deleted
-			if (go->pos.x < 0 - go->scale.Length() || go->pos.x > m_worldWidth + go->scale.Length() || go->pos.y < 0 - go->scale.Length() || go->pos.y > m_worldHeight + go->scale.Length())
-			{
-				go->active = false;
-				--m_count;
-			}
+			//Exercise 2: implement equation 1 & 2
+			go->vel += m_gravity * dt * m_speed; // m_speed is the speed of the simulation tldr makes things go fast yes
+			go->pos += go->vel * dt;
 		}
+
+		if (go->pos.x <= go->scale.x || go->pos.x >= m_worldWidth - go->scale.x)
+		{
+			go->vel.x *= -1;
+		}
+		if (go->pos.y >= m_worldHeight - go->scale.x || go->pos.y <= go->scale.x)
+		{
+			go->vel.y *= -1;
+		}
+		
+		// Check to see if ball moved out of cells
+		Cell* newCell = m_grid->GetCell(go->pos);
+		if (newCell != go->currentCell)
+		{
+			// Update new go's position
+			m_grid->RemoveGameObject(go);
+			m_grid->AddGameObject(go, newCell);
+		}
+		
+		// If clip out of screen, make sure it is deleted
+		if (go->pos.x < 0 - go->scale.Length() || go->pos.x > m_worldWidth + go->scale.Length() || go->pos.y < 0 - go->scale.Length() || go->pos.y > m_worldHeight + go->scale.Length())
+		{
+			go->active = false;
+			m_grid->RemoveGameObject(go);
+			--m_count;
+		}
+		// Please fix this i don't like this , use quad tree
+		
+
+		// Naive solution
+		//if (go->type == GameObject::GO_BALL)
+		//{
+		//	for (std::vector<GameObject*>::iterator it2 = m_goList.begin(); it2 != m_goList.end(); ++it2) // n^2 algo
+		//	{
+		//		GameObject* temp = (GameObject*)*it2;
+		//		// No point checking your own self
+		//		if (temp == go || !temp->active)
+		//			continue;
+		//		if (temp->type == GameObject::GO_CUBE)
+		//		{
+		//			// checking length between the two objects
+		//			if (CheckCollision(go, temp))
+		//			{
+		//				go->active = false;
+		//				temp->active = false;
+		//			}
+		//		}
+		//		else if (temp->type == GameObject::GO_BALL)
+		//		{
+		//			if (CheckCollision(go, temp))
+		//			{
+		//				// Elastic collision
+		//				float sqrDistance = (go->pos - temp->pos).LengthSquared();
+		//				float displacement = (go->vel - temp->vel).Dot(go->pos - temp->pos) / sqrDistance;
+		//				float combinedMasses = go->mass + temp->mass;
+		//				go->vel = go->vel - (2 * temp->mass / combinedMasses) * displacement * (go->pos - temp->pos); // v1 = v1 - 2m2 / (m1 + m2) * (v1 - v2).(x1 - x2) * (x1 - x2)
+		//				temp->vel = temp->vel - (2 * go->mass / combinedMasses) * displacement * (temp->pos - go->pos);// v2 = v2 - 2m1 / (m1 + m2) * (v1 - v2).(x1 - x2) * (x2 - x1)
+		//			}
+		//		}
+		//	}
+		//}
+
 	}
+	UpdateCollision(m_grid);
 }
 
 void SceneSimulation::Render()
@@ -308,7 +348,7 @@ void SceneSimulation::Render()
 
 	ss.precision(5);
 	ss << "FPS: " << fps;
-	RenderTextOnScreen(meshList[GEO_TEXT], ss.str(), Color(0, 1, 0), 3, 0, 3);
+	RenderTextOnScreen(meshList[GEO_TEXT], ss.str(), Color(0, 1, 1), 3, 0, 3);
 
 	//Exercise 6: print simulation speed
 	ss.str("");
@@ -383,6 +423,45 @@ void SceneSimulation::Exit()
 	}
 }
 
+void SceneSimulation::UpdateCollision(std::unique_ptr<Grid>& grid)
+{
+	for (int i = 0; i < grid->m_cells.size(); i++)
+	{
+		int x = i % grid->m_numXCells;
+		int y = i / grid->m_numXCells;
+
+		Cell& cell = grid->m_cells[i];
+
+		for (int j = 0; j < cell.m_goLists.size(); j++)
+		{
+			GameObject* go = cell.m_goLists[j];
+			// Update with the residing cell
+			CheckCollision(go, cell.m_goLists, j + 1);
+			// Update collision with neighbour cell
+			if (x > 0)
+			{
+				// Left
+				CheckCollision(go, grid->GetCell(x - 1, y)->m_goLists, 0);
+				if (y > 0)
+				{
+					// Top left
+					CheckCollision(go, grid->GetCell(x - 1, y - 1)->m_goLists, 0);
+				}
+				if (y < grid->m_numYCells - 1)
+				{
+					// Bottom left
+					CheckCollision(go, grid->GetCell(x - 1, y + 1)->m_goLists, 0);
+				}
+			}
+			// Up cell
+			if (y > 0)
+			{
+				CheckCollision(go, grid->GetCell(x , y - 1)->m_goLists, 0);
+			}
+		}
+	}
+}
+
 bool SceneSimulation::CheckCollision(GameObject* go, GameObject* go2)
 {
 	// What this is, is that it always assumes go->type is always a ball
@@ -395,8 +474,22 @@ bool SceneSimulation::CheckCollision(GameObject* go, GameObject* go2)
 	return false;
 }
 
+void SceneSimulation::CheckCollision(GameObject* go, std::vector<GameObject*>& gameObjectsInCell, int startingIndex)
+{
+	for (int i = startingIndex; i < gameObjectsInCell.size(); i++)
+	{
+		if (CheckCollision(go, gameObjectsInCell[i]))
+			CollisionResponse(go, gameObjectsInCell[i]);
+	}
+}
+
 void SceneSimulation::CollisionResponse(GameObject* go, GameObject* go2)
 {
+	float sqrDistance = (go->pos - go2->pos).LengthSquared();
+	float displacement = (go->vel - go2->vel).Dot(go->pos - go2->pos) / sqrDistance;
+	float combinedMasses = go->mass + go2->mass;
+	go->vel = go->vel - (2 * go2->mass / combinedMasses) * displacement * (go->pos - go2->pos); // v1 = v1 - 2m2 / (m1 + m2) * (v1 - v2).(x1 - x2) * (x1 - x2)
+	go2->vel = go2->vel - (2 * go->mass / combinedMasses) * displacement * (go2->pos - go->pos);// v2 = v2 - 2m1 / (m1 + m2) * (v1 - v2).(x1 - x2) * (x2 - x1)
 }
 
 
