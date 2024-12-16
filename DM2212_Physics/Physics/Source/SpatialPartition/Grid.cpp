@@ -36,6 +36,16 @@ void Grid::AddGameObject(GameObject* go, Cell* cell)
 	go->cellVectorIndex = cell->m_goLists.size() - 1;
 }
 
+void Grid::UpdateGrid(GameObject* go)
+{
+	Cell* newCell = GetCell(go->pos);
+	if (newCell != go->currentCell)
+	{
+		RemoveGameObject(go);
+		AddGameObject(go, newCell);
+	}
+}
+
 Cell* Grid::GetCell(int x, int y)
 {
 	if (x < 0) x = 0;
@@ -50,6 +60,7 @@ Cell* Grid::GetCell(const Vector3& pos)
 {
 	int cellX = (int)pos.x / m_cellSize;
 	int cellY = (int)pos.y / m_cellSize;
+	std::cout << "Cell X: " << cellX << " , Cell y: " << cellY << std::endl;
 	return GetCell(cellX, cellY);
 }
 

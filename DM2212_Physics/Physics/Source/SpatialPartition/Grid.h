@@ -15,12 +15,18 @@ class Grid
 public:
 	Grid(unsigned int width,unsigned int height, unsigned int cellSize);
 	~Grid();
+
 	// Adds a gameobject and determines which cell it belongs to
 	void AddGameObject(GameObject* go);
+
 	// Adds a gameobject to a specific cell
 	void AddGameObject(GameObject* go, Cell* cell);
+	
+	// Updates the new position of gameobject in grid
+	void UpdateGrid(GameObject* go);
 	// Get the cell based on cell coordinates
 	Cell* GetCell(int x, int y);
+
 	// Get the cell based on world coordinates
 	Cell* GetCell(const Vector3& pos);
 

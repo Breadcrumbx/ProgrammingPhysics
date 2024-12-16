@@ -36,6 +36,7 @@ void SceneSimulation::Init()
 	for (int i = 0; i < 5000; i++)
 	{
 		GameObject* ball = new GameObject(GameObject::GO_BALL);
+		ball->scale *= 0.5f;
 		m_goList.push_back(ball);
 	}
 }
@@ -43,6 +44,7 @@ void SceneSimulation::Init()
 void SceneSimulation::Update(double dt)
 {
 	SceneBase::Update(dt);
+
 	if (Application::IsKeyPressed(VK_OEM_PLUS))
 	{
 		//Exercise 6: adjust simulation speed
@@ -107,6 +109,7 @@ void SceneSimulation::Update(double dt)
 				int h = Application::GetWindowHeight();
 				go->pos.Set(rand() % int(m_worldWidth - go->scale.x) + go->scale.x , rand() % int(m_worldHeight - go->scale.x) + go->scale.x, 0); // Make sure when objects are spawned they are within the screen
 				go->vel.Set(rand() % 2, rand() % 2 , 0); //random range between -100 - 100
+				// Add the gameobject into the grid
 				m_grid->AddGameObject(go);
 			}
 		}
@@ -131,7 +134,7 @@ void SceneSimulation::Update(double dt)
 	//Mouse Section
 	static bool bLButtonState = false;
 	//Exercise 10: ghost code here
-	if (!bLButtonState && Application::IsMousePressed(0) && !m_goList[m_goList.size() - 1]->active)
+	if (!bLButtonState && Application::IsMousePressed(0))
 	{
 		bLButtonState = true;
 		std::cout << "LBUTTON DOWN" << std::endl;
@@ -160,7 +163,6 @@ void SceneSimulation::Update(double dt)
 				go->active = true;
 				go->type = GameObject::GO_BALL;
 				go->scale = m_ghost->scale;
-
 				double x, y;
 				Application::GetCursorPos(&x, &y);
 				int w = Application::GetWindowWidth();
@@ -246,14 +248,8 @@ void SceneSimulation::Update(double dt)
 			go->vel.y *= -1;
 		}
 		
-		// Check to see if ball moved out of cells
-		Cell* newCell = m_grid->GetCell(go->pos);
-		if (newCell != go->currentCell)
-		{
-			// Update new go's position
-			m_grid->RemoveGameObject(go);
-			m_grid->AddGameObject(go, newCell);
-		}
+		// Update the grid after movement
+		m_grid->UpdateGrid(go);
 		
 		// If clip out of screen, make sure it is deleted
 		if (go->pos.x < 0 - go->scale.Length() || go->pos.x > m_worldWidth + go->scale.Length() || go->pos.y < 0 - go->scale.Length() || go->pos.y > m_worldHeight + go->scale.Length())
@@ -299,6 +295,7 @@ void SceneSimulation::Update(double dt)
 		//}
 
 	}
+	// Update the collision in every cell of the grid
 	UpdateCollision(m_grid);
 }
 
@@ -436,6 +433,8 @@ void SceneSimulation::UpdateCollision(std::unique_ptr<Grid>& grid)
 		{
 			GameObject* go = cell.m_goLists[j];
 			// Update with the residing cell
+
+			// So that does not check with ownself
 			CheckCollision(go, cell.m_goLists, j + 1);
 			// Update collision with neighbour cell
 			if (x > 0)
@@ -453,7 +452,7 @@ void SceneSimulation::UpdateCollision(std::unique_ptr<Grid>& grid)
 					CheckCollision(go, grid->GetCell(x - 1, y + 1)->m_goLists, 0);
 				}
 			}
-			// Up cell
+			// Bottom cell
 			if (y > 0)
 			{
 				CheckCollision(go, grid->GetCell(x , y - 1)->m_goLists, 0);

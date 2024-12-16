@@ -1,25 +1,25 @@
 ﻿  SceneSimulation.cpp
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(49,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(54,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(74,23): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(75,23): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(109,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(109,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(126,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(126,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(147,61): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(147,33): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(170,67): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(170,39): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(203,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(204,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(207,21): warning C4018: '<': signed/unsigned mismatch
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(236,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(237,25): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(428,20): warning C4018: '<': signed/unsigned mismatch
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(435,21): warning C4018: '<': signed/unsigned mismatch
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(450,11): warning C4018: '<': signed/unsigned mismatch
-C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(479,32): warning C4018: '<': signed/unsigned mismatch
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(51,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(56,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(76,23): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(77,23): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(111,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(111,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(129,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(129,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(150,61): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(150,33): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(172,67): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(172,39): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(205,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(206,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(209,21): warning C4018: '<': signed/unsigned mismatch
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(238,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(239,25): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(425,20): warning C4018: '<': signed/unsigned mismatch
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(432,21): warning C4018: '<': signed/unsigned mismatch
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(449,11): warning C4018: '<': signed/unsigned mismatch
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(478,32): warning C4018: '<': signed/unsigned mismatch
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\memory(3597,56): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
   (compiling source file 'Source/SceneSimulation.cpp')
       C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\memory(3597,56):
@@ -27,4 +27,10 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.3412
           C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SceneSimulation.cpp(24,16):
           see reference to function template instantiation 'std::unique_ptr<Grid,std::default_delete<Grid>> std::make_unique<Grid,float&,float&,int,0>(float &,float &,int &&)' being compiled
   
+  Grid.cpp
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SpatialPartition\Grid.cpp(14,20): warning C4018: '<': signed/unsigned mismatch
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SpatialPartition\Grid.cpp(52,8): warning C4018: '>=': signed/unsigned mismatch
+C:\Projects\ProgrammingPhysics\DM2212_Physics\Physics\Source\SpatialPartition\Grid.cpp(54,8): warning C4018: '>=': signed/unsigned mismatch
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Physics.vcxproj -> C:\Projects\ProgrammingPhysics\DM2212_Physics\Debug\Physics.exe
