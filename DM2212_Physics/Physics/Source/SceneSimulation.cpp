@@ -20,9 +20,6 @@ void SceneSimulation::Init()
 	//Calculating aspect ratio
 	m_worldHeight = 100.f;
 	m_worldWidth = m_worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
-
-	m_grid = std::make_unique<Grid>(m_worldWidth, m_worldHeight, 8);
-	
 	// Number of gameobjects in scene
 	m_count = 0;
 
@@ -32,13 +29,16 @@ void SceneSimulation::Init()
 	m_gravity.Set(0, 0, 0); //init gravity as 9.8ms-2 downwards
 
 	m_ghost = new GameObject(GameObject::GO_BALL);
+	m_ghost->scale *= 0.25f;
 	//Exercise 1: construct 10 GameObject with type GO_BALL and add into m_goList
-	for (int i = 0; i < 5000; i++)
+	for (int i = 0; i < 10000; i++)
 	{
 		GameObject* ball = new GameObject(GameObject::GO_BALL);
-		ball->scale *= 0.5f;
+		ball->scale = m_ghost->scale;
 		m_goList.push_back(ball);
 	}
+	const int CELL_SIZE = 1;
+	m_grid = std::make_unique<Grid>(m_worldWidth, m_worldHeight, CELL_SIZE);
 }
 
 void SceneSimulation::Update(double dt)
@@ -250,7 +250,6 @@ void SceneSimulation::Update(double dt)
 		
 		// Update the grid after movement
 		m_grid->UpdateGrid(go);
-		
 		// If clip out of screen, make sure it is deleted
 		if (go->pos.x < 0 - go->scale.Length() || go->pos.x > m_worldWidth + go->scale.Length() || go->pos.y < 0 - go->scale.Length() || go->pos.y > m_worldHeight + go->scale.Length())
 		{
@@ -434,7 +433,8 @@ void SceneSimulation::UpdateCollision(std::unique_ptr<Grid>& grid)
 			GameObject* go = cell.m_goLists[j];
 			// Update with the residing cell
 
-			// So that does not check with ownself
+			
+			// Check current cell that it is in, starting index is + 1 so that does not check with ownself
 			CheckCollision(go, cell.m_goLists, j + 1);
 			// Update collision with neighbour cell
 			if (x > 0)

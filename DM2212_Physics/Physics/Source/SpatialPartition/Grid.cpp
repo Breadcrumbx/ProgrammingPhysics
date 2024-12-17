@@ -60,7 +60,7 @@ Cell* Grid::GetCell(const Vector3& pos)
 {
 	int cellX = (int)pos.x / m_cellSize;
 	int cellY = (int)pos.y / m_cellSize;
-	std::cout << "Cell X: " << cellX << " , Cell y: " << cellY << std::endl;
+	//std::cout << "Cell X: " << cellX << " , Cell y: " << cellY << std::endl;
 	return GetCell(cellX, cellY);
 }
 
