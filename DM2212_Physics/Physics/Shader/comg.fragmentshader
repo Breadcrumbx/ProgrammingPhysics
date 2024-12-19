@@ -60,7 +60,7 @@ uniform bool colorTextureEnabled;
 uniform sampler2D colorTexture;
 uniform bool textEnabled;
 uniform vec3 textColor;
-
+uniform vec3 fragColor;
 void main(){
 	if(lightEnabled == true)
 	{
@@ -124,7 +124,10 @@ void main(){
 				color = texture2D( colorTexture, texCoord );
 		}
 		else
+		{
 			color = vec4( fragmentColor, 1 );
+			//color = vec4(fragColor, 1);
+		}
 	}
 	if(color.a <= 0.1)
 	{

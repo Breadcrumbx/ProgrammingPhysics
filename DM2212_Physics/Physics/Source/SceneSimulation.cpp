@@ -29,22 +29,22 @@ void SceneSimulation::Init()
 	m_gravity.Set(0, 0, 0); //init gravity as 9.8ms-2 downwards
 
 	m_ghost = new GameObject(GameObject::GO_BALL);
-	m_ghost->scale *= 0.25f;
+	m_ghost->scale *= 2;
 	//Exercise 1: construct 10 GameObject with type GO_BALL and add into m_goList
-	for (int i = 0; i < 10000; i++)
+	for (int i = 0; i < 500; i++)
 	{
 		GameObject* ball = new GameObject(GameObject::GO_BALL);
 		ball->scale = m_ghost->scale;
+		ball->color.Set(Math::RandFloatMinMax(0, 1), Math::RandFloatMinMax(0, 1), Math::RandFloatMinMax(0, 1));
 		m_goList.push_back(ball);
 	}
-	const int CELL_SIZE = 1;
+	const int CELL_SIZE = 8;
 	m_grid = std::make_unique<Grid>(m_worldWidth, m_worldHeight, CELL_SIZE);
 }
 
 void SceneSimulation::Update(double dt)
 {
 	SceneBase::Update(dt);
-
 	if (Application::IsKeyPressed(VK_OEM_PLUS))
 	{
 		//Exercise 6: adjust simulation speed
@@ -205,8 +205,19 @@ void SceneSimulation::Update(double dt)
 		float posX = x / w * m_worldWidth;
 		float posY = (h - y) / h * m_worldHeight;
 
-
-		for (int i = 0; i < m_goList.size(); ++i)
+		for (std::vector<GameObject*>::iterator it = m_goList.begin(); it != m_goList.end(); ++it)
+		{
+			GameObject* go = *it;
+			if (!go->active)
+			{
+				go->active = true;
+				go->type = GameObject::GO_CUBE;
+				go->pos.Set(posX, posY);
+				m_grid->AddGameObject(go);
+				break;
+			}
+		}
+		/*for (int i = 0; i < m_goList.size(); ++i)
 		{
 			if (m_goList[i]->active == false)
 			{
@@ -215,7 +226,7 @@ void SceneSimulation::Update(double dt)
 				m_goList[i]->pos.Set(posX, posY);
 				break;
 			}
-		}
+		}*/
 	}
 	else if (bRButtonState && !Application::IsMousePressed(1))
 	{
@@ -380,7 +391,6 @@ void SceneSimulation::RenderGO(GameObject* go)
 		modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
 		RenderMesh(meshList[GEO_BALL], false);
 		modelStack.PopMatrix();
-
 		break;
 	case GameObject::GO_CUBE:
 		//Render cube 
@@ -392,6 +402,21 @@ void SceneSimulation::RenderGO(GameObject* go)
 		modelStack.PopMatrix();
 		break;
 	}
+}
+
+GameObject* SceneSimulation::FetchGO()
+{
+	for (std::vector<GameObject*>::iterator it = m_goList.begin(); it != m_goList.end(); ++it)
+	{
+		GameObject* go = *it;
+		if (!go->active)
+		{
+			go->active = true;
+			return go;
+		}
+	}
+	// If doesn't exist , just return nullptr
+	return nullptr;
 }
 
 void SceneSimulation::Exit()
@@ -432,30 +457,28 @@ void SceneSimulation::UpdateCollision(std::unique_ptr<Grid>& grid)
 		{
 			GameObject* go = cell.m_goLists[j];
 			// Update with the residing cell
-
-			
 			// Check current cell that it is in, starting index is + 1 so that does not check with ownself
-			CheckCollision(go, cell.m_goLists, j + 1);
+			CheckCollisionInCell(go, cell.m_goLists, j + 1);
 			// Update collision with neighbour cell
 			if (x > 0)
 			{
 				// Left
-				CheckCollision(go, grid->GetCell(x - 1, y)->m_goLists, 0);
+				CheckCollisionInCell(go, grid->GetCell(x - 1, y)->m_goLists, 0);
 				if (y > 0)
 				{
 					// Top left
-					CheckCollision(go, grid->GetCell(x - 1, y - 1)->m_goLists, 0);
+					CheckCollisionInCell(go, grid->GetCell(x - 1, y - 1)->m_goLists, 0);
 				}
 				if (y < grid->m_numYCells - 1)
 				{
 					// Bottom left
-					CheckCollision(go, grid->GetCell(x - 1, y + 1)->m_goLists, 0);
+					CheckCollisionInCell(go, grid->GetCell(x - 1, y + 1)->m_goLists, 0);
 				}
 			}
 			// Bottom cell
 			if (y > 0)
 			{
-				CheckCollision(go, grid->GetCell(x , y - 1)->m_goLists, 0);
+				CheckCollisionInCell(go, grid->GetCell(x , y - 1)->m_goLists, 0);
 			}
 		}
 	}
@@ -464,16 +487,17 @@ void SceneSimulation::UpdateCollision(std::unique_ptr<Grid>& grid)
 bool SceneSimulation::CheckCollision(GameObject* go, GameObject* go2)
 {
 	// What this is, is that it always assumes go->type is always a ball
+	
 	if (go2->type == GameObject::GO_BALL || go2->type == GameObject::GO_CUBE)
 	{
 		float combinedRadii = go->scale.x + go2->scale.x;
 		float distanceSquared = (go->pos - go2->pos).LengthSquared();
-		return(distanceSquared <= combinedRadii * combinedRadii && (go2->vel - go->vel).Dot(go2->pos - go->pos) < 0);
+		return(distanceSquared < combinedRadii * combinedRadii && (go2->vel - go->vel).Dot(go2->pos - go->pos) < 0);
 	}
 	return false;
 }
 
-void SceneSimulation::CheckCollision(GameObject* go, std::vector<GameObject*>& gameObjectsInCell, int startingIndex)
+void SceneSimulation::CheckCollisionInCell(GameObject* go, std::vector<GameObject*>& gameObjectsInCell, int startingIndex)
 {
 	for (int i = startingIndex; i < gameObjectsInCell.size(); i++)
 	{
@@ -489,6 +513,9 @@ void SceneSimulation::CollisionResponse(GameObject* go, GameObject* go2)
 	float combinedMasses = go->mass + go2->mass;
 	go->vel = go->vel - (2 * go2->mass / combinedMasses) * displacement * (go->pos - go2->pos); // v1 = v1 - 2m2 / (m1 + m2) * (v1 - v2).(x1 - x2) * (x1 - x2)
 	go2->vel = go2->vel - (2 * go->mass / combinedMasses) * displacement * (go2->pos - go->pos);// v2 = v2 - 2m1 / (m1 + m2) * (v1 - v2).(x1 - x2) * (x2 - x1)
+	Color temp = go->color;
+	go->color = go2->color;
+	go2->color = temp;
 }
 
 

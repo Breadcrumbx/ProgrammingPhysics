@@ -82,6 +82,7 @@ public:
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void RenderMesh(Mesh *mesh, bool enableLight);
+	void RenderMesh(Mesh *mesh, bool enableLight, Color color);
 	void RenderGO(GameObject *go);
 	void RenderMeshOnScreen(Mesh* mesh, float x, float y, float sizex, float sizey);
 	GameObject* FetchGO();

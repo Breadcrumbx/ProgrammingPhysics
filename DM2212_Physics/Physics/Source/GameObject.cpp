@@ -11,8 +11,10 @@ GameObject::GameObject(GAMEOBJECT_TYPE typeValue)
 	angularVelocity(0.f),
 	Stimer(0),
 	Btimer(0),
-	split(false)
+	split(false),
+	color()
 {
+
 }
 
 GameObject::~GameObject()

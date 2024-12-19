@@ -2,7 +2,7 @@
 #define GAME_OBJECT_H
 
 #include "Vector3.h"
-
+#include "Vertex.h"
 struct Cell;
 
 struct GameObject
@@ -36,18 +36,20 @@ struct GameObject
 		GO_POWERUP5,
 		GO_TOTAL, //must be last
 	};
+
 	GAMEOBJECT_TYPE type;
 	Vector3 pos;
 	Vector3 vel;
 	Vector3 scale;
 	Vector3 normal;
+	Vector3 dir;
+	Color color;
 	Cell* currentCell = nullptr;
 	unsigned int cellVectorIndex = -1;
 	bool active;
 	float mass;
 	int hp;
 	int rng;
-	Vector3 dir;
 	float momentOfInertia;
 	float angularVelocity;
 	float Stimer; // enemy shoot timer

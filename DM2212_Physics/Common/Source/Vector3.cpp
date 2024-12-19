@@ -71,6 +71,11 @@ void Vector3::Set( float a, float b, float c )
 	z = c;
 }
 
+void Vector3::Set(const Vector3& rhs)
+{
+	*(this) = rhs;
+}
+
 /******************************************************************************/
 /*!
 \brief	Set all elements to zero

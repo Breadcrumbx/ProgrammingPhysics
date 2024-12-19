@@ -1,1 +1,4 @@
-﻿  Common.vcxproj -> E:\Personal Projects\ProgrammingPhysics\DM2212_Physics\Release\Common.lib
+﻿  MatrixStack.cpp
+  Mtx44.cpp
+  Vector3.cpp
+  Common.vcxproj -> C:\Projects\ProgrammingPhysics\DM2212_Physics\Release\Common.lib

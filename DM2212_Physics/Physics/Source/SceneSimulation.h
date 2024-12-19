@@ -19,9 +19,11 @@ public:
 
 	void UpdateCollision(std::unique_ptr<Grid>& grid);
 	bool CheckCollision(GameObject* go, GameObject* go2);
-	void CheckCollision(GameObject* go, std::vector<GameObject*>& gameObjectsInCell, int startingIndex);
+	void CheckCollisionInCell(GameObject* go, std::vector<GameObject*>& gameObjectsInCell, int startingIndex);
 	void CollisionResponse(GameObject* go, GameObject* go2);
 	void RenderGO(GameObject* go);
+
+	GameObject* FetchGO();
 private:
 	std::vector<GameObject*> m_goList;
 	// Grid for spatial partition
