@@ -66,6 +66,10 @@ void SceneBase::Init()
 	// Get a handle for our "textColor" uniform
 	m_parameters[U_TEXT_ENABLED] = glGetUniformLocation(m_programID, "textEnabled");
 	m_parameters[U_TEXT_COLOR] = glGetUniformLocation(m_programID, "textColor");
+
+	// Get a handle for our "changeColor" uniform bool
+	m_parameters[U_CHANGECOLOR_BOOL] = glGetUniformLocation(m_programID, "changeColor");
+	m_parameters[U_FRAGCOLOR] = glGetUniformLocation(m_programID, "fragColor");
 	
 	// Use our shader
 	glUseProgram(m_programID);
@@ -255,6 +259,8 @@ void SceneBase::RenderMesh(Mesh *mesh, bool enableLight)
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
 	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
 	glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
+	glUniform1i(m_parameters[U_CHANGECOLOR_BOOL], 0);
+	//glUniform1i(glGetUniformLocation(m_programID, "changeColor"), 0); // This line of code is expensive af causes lag spike at the beginning
 	if(enableLight && bLightEnabled)
 	{
 		glUniform1i(m_parameters[U_LIGHTENABLED], 1);
@@ -284,6 +290,7 @@ void SceneBase::RenderMesh(Mesh *mesh, bool enableLight)
 	{
 		glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 0);
 	}
+
 	mesh->Render();
 	if(mesh->textureID > 0)
 	{
@@ -297,7 +304,9 @@ void SceneBase::RenderMesh(Mesh* mesh, bool enableLight, Color color)
 	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
 	glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
 	// This sets the variable fragColor in fragment shader
-	glUniform3fv(glGetUniformLocation(m_programID, "fragColor"), 1, &color.r);
+	glUniform1i(m_parameters[U_CHANGECOLOR_BOOL], 1);
+	glUniform3fv(m_parameters[U_FRAGCOLOR], 1, &color.r);
+	//glUniform3fv(glGetUniformLocation(m_programID, "fragColor"), 1, &color.r); // Brute force
 	if (enableLight && bLightEnabled)
 	{
 		glUniform1i(m_parameters[U_LIGHTENABLED], 1);
@@ -327,6 +336,7 @@ void SceneBase::RenderMesh(Mesh* mesh, bool enableLight, Color color)
 	{
 		glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 0);
 	}
+
 	mesh->Render();
 	if (mesh->textureID > 0)
 	{

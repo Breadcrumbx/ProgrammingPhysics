@@ -53,6 +53,7 @@ const int MAX_LIGHTS = 8;
 
 // Values that stay constant for the whole mesh.
 uniform bool lightEnabled;
+uniform bool changeColor;
 uniform Light lights[MAX_LIGHTS];
 uniform Material material;
 uniform int numLights;
@@ -125,8 +126,10 @@ void main(){
 		}
 		else
 		{
-			color = vec4( fragmentColor, 1 );
-			//color = vec4(fragColor, 1);
+			if(changeColor == true)
+				color = vec4(fragColor, 1);
+			else
+				color = vec4( fragmentColor, 1 );
 		}
 	}
 	if(color.a <= 0.1)

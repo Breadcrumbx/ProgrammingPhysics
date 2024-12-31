@@ -11,6 +11,7 @@ struct GameObject
 	{
 		GO_NONE = 0,
 		GO_BALL,
+		GO_RING,
 		GO_CUBE,
 		GO_WALL,
 		GO_SPRING, // Spring

@@ -29,16 +29,16 @@ void SceneSimulation::Init()
 	m_gravity.Set(0, 0, 0); //init gravity as 9.8ms-2 downwards
 
 	m_ghost = new GameObject(GameObject::GO_BALL);
-	m_ghost->scale *= 2;
+	m_ghost->scale *= 0.5f;
 	//Exercise 1: construct 10 GameObject with type GO_BALL and add into m_goList
-	for (int i = 0; i < 500; i++)
+	for (int i = 0; i < 5000; i++)
 	{
 		GameObject* ball = new GameObject(GameObject::GO_BALL);
 		ball->scale = m_ghost->scale;
 		ball->color.Set(Math::RandFloatMinMax(0, 1), Math::RandFloatMinMax(0, 1), Math::RandFloatMinMax(0, 1));
 		m_goList.push_back(ball);
 	}
-	const int CELL_SIZE = 8;
+	const int CELL_SIZE = ceil(m_ghost->scale.x * 2);
 	m_grid = std::make_unique<Grid>(m_worldWidth, m_worldHeight, CELL_SIZE);
 }
 
@@ -136,9 +136,11 @@ void SceneSimulation::Update(double dt)
 	//Exercise 10: ghost code here
 	if (!bLButtonState && Application::IsMousePressed(0))
 	{
+		GameObject* go = FetchGO();
+		if (go == nullptr)
+			return;
 		bLButtonState = true;
 		std::cout << "LBUTTON DOWN" << std::endl;
-
 		double x, y;
 		Application::GetCursorPos(&x, &y);
 		int w = Application::GetWindowWidth();
@@ -148,6 +150,8 @@ void SceneSimulation::Update(double dt)
 		{
 			m_ghost->active = true;
 			m_ghost->pos = Vector3(x / w * m_worldWidth, (h - y) / h * m_worldHeight, 0); // Conversion from screen space to world space?
+			m_ghost->color = go->color;
+			// Get the current inactive go's color
 		}
 	}
 	else if (bLButtonState && !Application::IsMousePressed(0))
@@ -389,7 +393,7 @@ void SceneSimulation::RenderGO(GameObject* go)
 		modelStack.PushMatrix();
 		modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
 		modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
-		RenderMesh(meshList[GEO_BALL], false);
+		RenderMesh(meshList[GEO_BALL], false, go->color);
 		modelStack.PopMatrix();
 		break;
 	case GameObject::GO_CUBE:
@@ -411,7 +415,7 @@ GameObject* SceneSimulation::FetchGO()
 		GameObject* go = *it;
 		if (!go->active)
 		{
-			go->active = true;
+			//go->active = true;
 			return go;
 		}
 	}
@@ -508,11 +512,13 @@ void SceneSimulation::CheckCollisionInCell(GameObject* go, std::vector<GameObjec
 
 void SceneSimulation::CollisionResponse(GameObject* go, GameObject* go2)
 {
+	// Elastic collision
 	float sqrDistance = (go->pos - go2->pos).LengthSquared();
 	float displacement = (go->vel - go2->vel).Dot(go->pos - go2->pos) / sqrDistance;
 	float combinedMasses = go->mass + go2->mass;
 	go->vel = go->vel - (2 * go2->mass / combinedMasses) * displacement * (go->pos - go2->pos); // v1 = v1 - 2m2 / (m1 + m2) * (v1 - v2).(x1 - x2) * (x1 - x2)
 	go2->vel = go2->vel - (2 * go->mass / combinedMasses) * displacement * (go2->pos - go->pos);// v2 = v2 - 2m1 / (m1 + m2) * (v1 - v2).(x1 - x2) * (x2 - x1)
+	// Swaps colour with collided object
 	Color temp = go->color;
 	go->color = go2->color;
 	go2->color = temp;

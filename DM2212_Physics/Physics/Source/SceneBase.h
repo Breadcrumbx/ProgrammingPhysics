@@ -38,6 +38,8 @@ class SceneBase : public Scene
 		U_COLOR_TEXTURE,
 		U_TEXT_ENABLED,
 		U_TEXT_COLOR,
+		U_CHANGECOLOR_BOOL,
+		U_FRAGCOLOR,
 		U_TOTAL,
 	};
 public:
